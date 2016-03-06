@@ -4,7 +4,7 @@
 
 LedOutput ledOutput(4, 2);
 ButtonInput btnInput(&ledOutput, 4, 8);
-GeniusGame game(&btnInput, &ledOutput);
+GeniusGame game(&btnInput, &ledOutput, 4);
 
 void setup() {
   ledOutput.initialize();

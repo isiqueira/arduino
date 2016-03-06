@@ -10,6 +10,8 @@ class GeniusGame{
     ButtonInput *input;
     LedOutput *ledOutput;
 
+    short qnt = 0;
+
     short gameOrder[100];
     short gamePos = -1;
     short playPos = -1;
@@ -17,16 +19,17 @@ class GeniusGame{
     short currentMode = START_MODE;
 
   public:
-    GeniusGame(ButtonInput *in, LedOutput *out){
+    GeniusGame(ButtonInput *in, LedOutput *out, short q){
       input = in;
       ledOutput = out;
-      randomSeed(analogRead(0));
+      qnt = q;
     }
 
     void start(){
+      randomSeed(analogRead(0));
       gamePos = -1;
       playPos = -1;
-      for(int i=0; i<3; i++){
+      for(int i=0; i<qnt; i++){
         ledOutput->blinkAll();
         delay(100);
       }
@@ -35,7 +38,7 @@ class GeniusGame{
 
     void replay(){
       gamePos++;
-      gameOrder[gamePos] = random(4);
+      gameOrder[gamePos] = random(qnt);
       for (int i=0; i<=gamePos; i++){
         ledOutput->blinkLed(gameOrder[i]);
         delay(200);
